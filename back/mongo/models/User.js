@@ -1,22 +1,35 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    unique: true,
+  },
   firstName: {
     type: String,
     required: true,
+    minlength: 3,
   },
   lastName: {
     type: String,
     required: true,
+    minlength: 3,
   },
   email: {
     type: String,
     required: true,
   },
-  twoFactorAuthentication: {
-    type: Boolean,
+  hashPassword: {
+    type: String,
     required: true,
+  },
+  entries: {
+    type: [
+      {
+        type: String,
+      },
+    ],
   },
 });
 
-module.exports = mongoose.model("User", postSchema);
+module.exports = mongoose.model("User", userSchema);
