@@ -23,7 +23,7 @@ async function login(req) {
         return { error: response.error };
       }
     }
-    return { error: "Email or password are incorrect" };
+    return { error: "Email or password is incorrect" };
   }
   return { error: "Missing email or password in body" };
 }

@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   if (!response.error) {
     return res.json({ user: response.user, registered: true });
   }
-  return res.status(403).json({ error: response.error, registered: false });
+  return res.status(403).send({ error: response.error, registered: false });
 });
 
 module.exports = router;
