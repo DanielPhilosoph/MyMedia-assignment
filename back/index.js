@@ -9,12 +9,10 @@ const { MONGO_URI, APP_PORT } = require("./config/config");
 mongoose
   .connect(MONGO_URI)
   .then(() => {
-    console.log(`connected to MongoDB - ${env}`);
+    console.log(`connected to MongoDB`);
 
     //! Run API listen
-    app.listen(APP_PORT, () =>
-      console.log(`app listening at http://localhost:${APP_PORT}`)
-    );
+    app.listen(APP_PORT, () => console.log(`app listening at http://localhost:${APP_PORT}`));
   })
   .catch((error) => {
     console.log("error connecting to MongoDB:", error.message);

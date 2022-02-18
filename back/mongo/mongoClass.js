@@ -31,7 +31,9 @@ class DB {
 
   async getUserById(id) {
     try {
-      return { user: await this.User.findById(id) };
+      let user = await this.User.findById(id);
+      const { __v, ...restUser } = user._doc;
+      return { user: restUser };
     } catch (error) {
       return { error: "Could not find user" };
     }
@@ -41,10 +43,8 @@ class DB {
     try {
       let result = authenticateUser(firstName, lastName, email, password);
       if (result.valid) {
-        id = uniqid();
-        let hashedPassword = this.hashPassword(password);
-        await this.User.insertOne({
-          userId: id,
+        let hashedPassword = await this.hashPassword(password);
+        const user = await this.User.create({
           firstName,
           lastName,
           email,
@@ -52,18 +52,14 @@ class DB {
         });
         return {
           insert: true,
-          user: {
-            userId: id,
-            firstName,
-            lastName,
-            email,
-          },
+          user: this.cleanUserProperties(user._doc),
           error: "",
         };
       } else {
         return { error: result.error, insert: false };
       }
     } catch (error) {
+      // console.log(error);
       return { error: "Could not insert user", insert: false };
     }
   }
@@ -71,24 +67,38 @@ class DB {
   async getUsersByQuery(query) {
     try {
       if (query !== "") {
-        const users = await this.User.find({
+        let users = await this.User.find({
           $or: [{ firstName: { $regex: `${query}` } }, { lastName: { $regex: `${query}` } }],
+        });
+        users = users.map((user) => {
+          return this.cleanUserProperties(user._doc);
         });
         return { users };
       } else {
-        const users = await this.User.find({});
+        let users = await this.User.find({});
+        users = users.map((user) => {
+          return this.cleanUserProperties(user._doc);
+        });
         return { users };
       }
     } catch (error) {
+      console.log(error);
       return { error: "Error while querying for users" };
     }
   }
 
-  hashPassword(password) {
-    let hashedPassword = "";
-    bcrypt.genSalt(parseInt(process.env.ROUNDS), function (_err, salt) {
-      bcrypt.hash(password, salt, function (_err, hash) {
-        hashedPassword = hash;
+  cleanUserProperties(user) {
+    const { __v, hashPassword, ...rest } = user;
+    return { ...rest };
+  }
+
+  async hashPassword(password) {
+    const hashedPassword = await new Promise((resolve, reject) => {
+      bcrypt.genSalt(parseInt(process.env.ROUNDS), function (_err, salt) {
+        bcrypt.hash(password, salt, function (_err, hash) {
+          if (_err) reject(_err);
+          resolve(hash);
+        });
       });
     });
     return hashedPassword;
@@ -98,16 +108,17 @@ class DB {
     const user = this.getUserById(id);
     if (!user.error) {
       try {
-        await this.User.findOneAndUpdate(
-          { userId: id },
-          { $push: { loggingTime: new Date().toString() } }
+        await this.User.updateOne(
+          { _id: id },
+          { $push: { entries: { loggingTime: new Date().toString() } } }
         );
         return { updated: true };
       } catch (error) {
+        console.log(error);
         return { updated: false, error: "Error while updating logs" };
       }
     }
   }
 }
 
-export default DB;
+module.exports = DB;

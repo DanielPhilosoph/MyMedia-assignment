@@ -1,4 +1,4 @@
-const DB = require("../mongo/mongo_class");
+const DB = require("../mongo/mongoClass");
 
 const db = new DB();
 

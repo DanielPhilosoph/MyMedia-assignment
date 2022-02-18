@@ -1,15 +1,13 @@
 const emailValidator = require("email-validator");
 const bcrypt = require("bcrypt");
 
-function verifyPassword(password, hash) {
-  let valid = false;
-  bcrypt.compare(password.toString(), hash, function (err, result) {
-    // Valid password
-    if (result) {
-      valid = true;
-    }
+async function verifyPassword(password, hash) {
+  return await new Promise((resolve, reject) => {
+    bcrypt.compare(password.toString(), hash, function (err, result) {
+      if (err) reject(false);
+      resolve(result);
+    });
   });
-  return true;
 }
 
 function authenticateUser(firstName, LastName, email, password) {

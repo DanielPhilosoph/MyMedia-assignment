@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { register } = require("../controllers/user");
+const { register } = require("../controllers/register");
 
 //? Route to:  /register
 
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   const response = await register(req);
   if (!response.error) {
     return res.json({ user: response.user, registered: true });

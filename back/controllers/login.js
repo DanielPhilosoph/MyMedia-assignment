@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const DB = require("../mongo/mongo_class");
+const DB = require("../mongo/mongoClass");
 const { verifyPassword } = require("../helper/functions");
 
 const db = new DB();
@@ -8,14 +8,14 @@ async function login(req) {
   if (req.body.email && req.body.password) {
     const user = await db.getUserByEmail(req.body.email);
     if (user.user) {
-      const { userId, email, firstName, lastName, hashPassword } = user.user;
-      if (verifyPassword(req.body.password, hashPassword)) {
-        const token = generateToken({ id: userId, email: email });
-        const response = await db.addLogToUserEntries(userId);
+      const { _id, email, firstName, lastName, hashPassword } = user.user;
+      if (await verifyPassword(req.body.password, hashPassword)) {
+        const token = generateToken({ _id, email: email });
+        const response = await db.addLogToUserEntries(_id);
         if (response.updated) {
           return {
             token,
-            userId,
+            _id,
             firstName,
             lastName,
           };

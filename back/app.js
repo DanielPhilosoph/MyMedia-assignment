@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./routes/user");
@@ -20,8 +19,8 @@ app.use("/user", authenticateMiddleware, userRouter);
 
 //? ---------------- Error 404 --------------------
 
-app.use("*", (req, res) => {
-  throw { code: 404, message: "unknown endpoint" };
+app.use("/", (req, res) => {
+  res.status(404).json({ message: "unknown endpoint" });
 });
 
 module.exports = app;

@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    unique: true,
-  },
   firstName: {
     type: String,
     required: true,
@@ -26,7 +22,7 @@ const userSchema = new mongoose.Schema({
   entries: {
     type: [
       {
-        type: String,
+        loggingTime: { type: String },
       },
     ],
   },
