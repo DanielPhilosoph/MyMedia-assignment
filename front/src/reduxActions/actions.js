@@ -8,14 +8,6 @@ export const updateCurrentUser = (dispatch, user) => {
   dispatch(action);
 };
 
-export const updateSearch = (dispatch, searchString) => {
-  const action = {
-    type: UPDATE_SEARCH,
-    payload: searchString,
-  };
-  dispatch(action);
-};
-
 export const updateUsers = (dispatch, users) => {
   const action = {
     type: UPDATE_USERS,

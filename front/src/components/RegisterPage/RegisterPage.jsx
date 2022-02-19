@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import "../CSS/mymedia.css";
+import "../../CSS/mymedia.css";
 
 import { fireErrorAlert, fireSuccessAlert } from "../../helper/functions";
 

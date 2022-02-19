@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import "../CSS/mymedia.css";
+import "../../CSS/mymedia.css";
 
 import { updateCurrentUser } from "../../reduxActions/actions";
 import { fireErrorAlert, fireSuccessAlert } from "../../helper/functions";

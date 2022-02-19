@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import UsersPage from "./UsersPage/UsersPage";
-import "../CSS/mymedia.css";
+import "../../CSS/mymedia.css";
 
 export default function MainPage() {
   const root = document.querySelector(":root");
