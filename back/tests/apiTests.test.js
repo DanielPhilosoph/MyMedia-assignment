@@ -142,4 +142,20 @@ describe("User tests", () => {
       .set("Authorization", userWithToken.token)
       .expect(404);
   });
+
+  it("GET /user/users will return all users", async () => {
+    let userWithToken;
+    mockDataUsers.forEach((user) => {
+      if (user.token) {
+        userWithToken = user;
+      }
+    });
+
+    const response = await request(app)
+      .get(`/user/users`)
+      .set("Authorization", userWithToken.token)
+      .expect(200);
+    expect(response.body.users).toBeDefined();
+    expect(response.body.users.length).toBe(mockDataUsers.length);
+  });
 });
