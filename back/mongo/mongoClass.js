@@ -88,6 +88,7 @@ class DB {
     }
   }
 
+  //? Removes __v and hashPassword from user
   cleanUserProperties(user) {
     const { __v, hashPassword, ...rest } = user;
     return { ...rest };
