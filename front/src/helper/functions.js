@@ -28,13 +28,32 @@ export function capitalizeFirstLetter(string) {
 
 export function formatDate(date) {
   try {
+    let dateAsDate = new Date(date);
+    const dateStr =
+      ("00" + (dateAsDate.getMonth() + 1)).slice(-2) +
+      "/" +
+      ("00" + dateAsDate.getDate()).slice(-2) +
+      "/" +
+      dateAsDate.getFullYear() +
+      " " +
+      ("00" + dateAsDate.getHours()).slice(-2) +
+      ":" +
+      ("00" + dateAsDate.getMinutes()).slice(-2) +
+      ":" +
+      ("00" + dateAsDate.getSeconds()).slice(-2);
     return {
-      date: new Date(date)
-        .toISOString()
-        .replace(/T/, " ") // replace T with a space
-        .replace(/\..+/, ""),
+      date: dateStr,
     };
   } catch (error) {
     return { error: "Could not parse date" };
   }
+}
+
+export function areParamsUndefined(...params) {
+  let isOneParamUndefined = false;
+  console.log(params);
+  params.forEach((param) => {
+    if (!param) isOneParamUndefined = true;
+  });
+  return isOneParamUndefined;
 }

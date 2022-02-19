@@ -6,7 +6,7 @@ import axios from "axios";
 import "../../CSS/mymedia.css";
 
 import { updateCurrentUser } from "../../reduxActions/actions";
-import { fireErrorAlert, fireSuccessAlert } from "../../helper/functions";
+import { fireErrorAlert, fireSuccessAlert, areParamsUndefined } from "../../helper/functions";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,19 +19,22 @@ export default function LoginPage() {
   };
 
   const onLoginClick = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/login", {
-        email: email.current.value,
-        password: password.current.value,
-      });
-      console.log(response);
-      if (response.data.login) {
-        updateCurrentUser(dispatch, response.data.user);
-        await fireSuccessAlert(`Welcome ${response.data.user.firstName}`);
-        navigate("/users");
+    if (!areParamsUndefined(email.current.value, password.current.value)) {
+      try {
+        const response = await axios.post("http://localhost:3001/login", {
+          email: email.current.value,
+          password: password.current.value,
+        });
+        if (response.data.login) {
+          updateCurrentUser(dispatch, response.data.user);
+          await fireSuccessAlert(`Welcome ${response.data.user.firstName}`);
+          navigate("/users");
+        }
+      } catch (error) {
+        fireErrorAlert(error.response.data.error);
       }
-    } catch (error) {
-      fireErrorAlert(error.response.data.error);
+    } else {
+      fireErrorAlert("Email or password are null");
     }
   };
 

@@ -4,9 +4,11 @@ import { capitalizeFirstLetter } from "../../../../helper/functions";
 
 export default function UserDiv({ user }) {
   const navigate = useNavigate();
+
   const onDivClick = () => {
     navigate(`/${user.email}`);
   };
+
   return (
     <div className="userDiv" onClick={onDivClick}>
       <h4>

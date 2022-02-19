@@ -89,6 +89,7 @@
   border-radius: 7px;
   cursor: pointer;
   transition: 0.5s;
+  margin-bottom: 10px;
 }
 
 .userDiv:hover {

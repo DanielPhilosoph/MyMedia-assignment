@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import "../../CSS/mymedia.css";
 
-import { fireErrorAlert, fireSuccessAlert } from "../../helper/functions";
+import { fireErrorAlert, fireSuccessAlert, areParamsUndefined } from "../../helper/functions";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,20 +19,31 @@ export default function LoginPage() {
 
   const onRegisterClick = async () => {
     let response;
-    try {
-      response = await axios.post("http://localhost:3001/register", {
-        firstName: firstName.current.value,
-        lastName: lastName.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      });
-      console.log(response);
-      if (response.data.register) {
-        await fireSuccessAlert(`Welcome ${response.data.user.firstName}`);
-        navigate("/");
+
+    if (
+      !areParamsUndefined(
+        email.current.value,
+        password.current.value,
+        lastName.current.value,
+        firstName.current.value
+      )
+    ) {
+      try {
+        response = await axios.post("http://localhost:3001/register", {
+          firstName: firstName.current.value,
+          lastName: lastName.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        });
+        if (response.data.registered) {
+          await fireSuccessAlert(`Glad you registered ${response.data.user.firstName}!`);
+          navigate("/");
+        }
+      } catch (error) {
+        fireErrorAlert(error.response.data.error);
       }
-    } catch (error) {
-      fireErrorAlert(error.response.data.error);
+    } else {
+      fireErrorAlert("One or more fields are null");
     }
   };
 
