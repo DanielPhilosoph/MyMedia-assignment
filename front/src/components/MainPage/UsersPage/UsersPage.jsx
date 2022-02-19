@@ -52,8 +52,13 @@ export default function UsersPage() {
       <div>
         <h1 className="usersPageHeaderH1">Users</h1>
       </div>
-      <div>
-        <input ref={search} type={"text"} onChange={debounce(() => onSearchChange())} />
+      <div className="searchDiv">
+        <input
+          ref={search}
+          type={"text"}
+          className="searchBar"
+          onChange={debounce(() => onSearchChange())}
+        />
       </div>
       <div>
         {state.users.map((user) => {
