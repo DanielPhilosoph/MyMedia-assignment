@@ -25,6 +25,7 @@ class DB {
       }
       return { unique: true };
     } catch (error) {
+      console.log(error);
       return { error: "Error while querying for user", unique: false };
     }
   }
@@ -117,6 +118,17 @@ class DB {
         console.log(error);
         return { updated: false, error: "Error while updating logs" };
       }
+    }
+  }
+
+  //! FOR TESTS ONLY
+  async deleteAll() {
+    try {
+      await this.User.deleteMany({});
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   }
 }

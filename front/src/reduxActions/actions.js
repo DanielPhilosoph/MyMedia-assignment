@@ -1,4 +1,4 @@
-const { UPDATE_CURRENT_USER, UPDATE_SEARCH, UPDATE_USERS } = require("./actionKeyWords");
+const { UPDATE_CURRENT_USER, UPDATE_USERS } = require("./actionKeyWords");
 
 export const updateCurrentUser = (dispatch, user) => {
   const action = {

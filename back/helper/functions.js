@@ -11,7 +11,7 @@ async function verifyPassword(password, hash) {
 }
 
 function authenticateUser(firstName, LastName, email, password) {
-  if (password.length < 7) {
+  if (password.length < 8) {
     return { error: "Password should more then 7 letter length", valid: false };
   }
   if (typeof firstName !== "string" || typeof LastName !== "string") {

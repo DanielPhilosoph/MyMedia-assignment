@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const { connectToDB } = require("./connectToDB");
+const { APP_PORT } = require("./config/config");
 const userRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
@@ -22,5 +24,12 @@ app.use("/user", authenticateMiddleware, userRouter);
 app.use("/", (req, res) => {
   res.status(404).json({ message: "unknown endpoint" });
 });
+
+async function listen() {
+  if (await connectToDB()) {
+    app.listen(APP_PORT, () => console.log(`app listening at http://localhost:${APP_PORT}`));
+  }
+}
+listen();
 
 module.exports = app;

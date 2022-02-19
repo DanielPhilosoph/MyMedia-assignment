@@ -23,7 +23,7 @@ export default function UsersPage() {
       }
     }
     getUsers();
-  }, []);
+  });
 
   function debounce(func, timeout = 500) {
     let timer;
