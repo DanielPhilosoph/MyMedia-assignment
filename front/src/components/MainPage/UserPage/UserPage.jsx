@@ -11,7 +11,7 @@ export default function UserPage({ user }) {
         </h3>
         <h5 className="userPageEmail">{user.email}</h5>
         <div style={{ margin: "auto", width: "50%" }}>
-          {user.entries.map((entry, i) => {
+          {user.entries.map((entry) => {
             return (
               <div className="entryDiv" key={entry._id}>
                 <span>Entry at {formatDate(entry.loggingTime).date}</span>

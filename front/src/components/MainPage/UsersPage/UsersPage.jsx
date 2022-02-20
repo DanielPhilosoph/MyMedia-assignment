@@ -2,15 +2,17 @@ import React, { useRef } from "react";
 import UserDiv from "./UserDiv/UserDiv";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 import { fireErrorAlert } from "../../../helper/functions";
-import { updateUsers } from "../../../reduxActions/actions";
+import { updateUsers, logout } from "../../../reduxActions/actions";
 import { BASE_URL } from "../../../config/config";
 
 export default function UsersPage() {
   const search = useRef(null);
   const state = useSelector((state) => state);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +23,12 @@ export default function UsersPage() {
         });
         updateUsers(dispatch, response.data.users);
       } catch (error) {
-        fireErrorAlert(error.response.data.error);
+        if (error.response.data.error === "wrong authorization") {
+          logout(dispatch);
+          navigate("/");
+        } else {
+          fireErrorAlert(error.response.data.error);
+        }
       }
     }
     getUsers();
@@ -44,7 +51,12 @@ export default function UsersPage() {
       });
       updateUsers(dispatch, response.data.users);
     } catch (error) {
-      fireErrorAlert(error.response.data.error);
+      if (error.response.data.error === "wrong authorization") {
+        logout(dispatch);
+        navigate("/");
+      } else {
+        fireErrorAlert(error.response.data.error);
+      }
     }
   };
 
