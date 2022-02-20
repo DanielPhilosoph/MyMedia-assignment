@@ -39,7 +39,7 @@ export default function UsersPage() {
 
   const onSearchChange = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/users?query=${search.current.value}`, {
+      const response = await axios.get(`${BASE_URL}/user/users?query=${search.current.value}`, {
         headers: { Authorization: state.currentUser.token },
       });
       updateUsers(dispatch, response.data.users);

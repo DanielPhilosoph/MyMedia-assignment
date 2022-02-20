@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
-
-const ALERT_TIME = 1500; //* 1.5 seconds
+import { ALERT_TIME } from "../config/config";
 
 export const fireErrorAlert = async (text) => {
   return await Swal.fire({
