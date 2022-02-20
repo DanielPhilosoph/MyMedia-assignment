@@ -1,0 +1,37 @@
+{
+  "name": "MyMedia-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielPhilosoph/MyMedia-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielPhilosoph/MyMedia-assignment/issues"
+  },
+  "homepage": "https://github.com/DanielPhilosoph/MyMedia-assignment#readme",
+  "dependencies": {
+    "bcrypt": "5.0.1",
+    "cors": "2.8.5",
+    "dotenv": "16.0.0",
+    "email-validator": "2.0.4",
+    "express": "4.17.3",
+    "jest": "27.5.1",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "6.2.2",
+    "nodemon": "2.0.15",
+    "supertest": "6.2.2",
+    "uniqid": "5.4.0"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3"
+  }
+}

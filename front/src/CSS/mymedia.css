@@ -1,0 +1,156 @@
+:root {
+  --body-bg-color: linear-gradient(0.75turn, #4587bd, #9198e5);
+}
+
+.body {
+  width: 100%;
+  background: var(--body-bg-color);
+}
+
+/*! ----- login + register ------- */
+
+.headerH1 {
+  margin-bottom: 40px;
+}
+
+.containerDiv {
+  padding: 100px;
+  width: 50%;
+  background-color: whitesmoke;
+  display: table;
+  margin: 0 auto;
+  border-radius: 7px;
+  margin-top: 15%;
+}
+.loginTable {
+  width: 100%;
+}
+.loginTable td {
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.link {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.link:hover {
+  color: rgb(0, 120, 180);
+}
+
+.sideSpan {
+  font-size: 12px;
+}
+
+.mainButton {
+  /* position: absolute; */
+  width: 100%;
+  margin: auto;
+  background-color: #008cba;
+  color: white;
+  border: 2px solid #008cba;
+}
+
+.mainButton:hover {
+  background-color: #006f94;
+  border: 2px solid #006f94;
+}
+
+/*! ------------------------------ */
+
+/** ------ Users Page ------- */
+
+.usersPageHeaderH1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
+
+/** --------------------------- */
+
+/*? ------- Users Page -------- */
+
+.userDiv {
+  width: 50%;
+  margin: auto;
+  background-color: #0babe0;
+  padding: 30px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 10px;
+}
+
+.userDiv:hover {
+  opacity: 0.9;
+  transition: 0.5s;
+}
+
+.userDivEmail {
+  text-align: right;
+  font-size: 14px;
+}
+
+.searchDiv {
+  margin: auto;
+  width: 40%;
+}
+
+.searchBar {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/*? --------------------------- */
+
+/*! ---------- User Page --------- */
+
+.userPageMainDiv {
+  width: 70%;
+  margin: auto;
+  margin-top: 30px;
+  padding: 30px;
+  background-color: #8cbbca;
+  border-radius: 7px;
+  margin-bottom: 20px;
+}
+
+.userPageHeader {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+.userPageEmail {
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
+
+.entryDiv {
+  padding: 5px 30px;
+  margin-top: 3px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #008cba;
+}
+
+/*! ------------------------------ */
+
+@media screen and (max-width: 500px) {
+  .welcomeDiv {
+    margin-top: 30px;
+  }
+}
