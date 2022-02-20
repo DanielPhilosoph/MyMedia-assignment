@@ -19,7 +19,7 @@ function App() {
   });
 
   useEffect(() => {
-    if (getLocalStorageInfo().token) {
+    if (getLocalStorageInfo() && getLocalStorageInfo().token) {
       async function checkToken() {
         try {
           const response = await axios.get(`${BASE_URL}/user/${getLocalStorageInfo().id}`, {
