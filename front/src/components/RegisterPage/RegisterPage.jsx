@@ -9,6 +9,7 @@ import {
   fireSuccessAlert,
   areParamsDefined,
   isNameValid,
+  changeBodyBackGround,
 } from "../../helper/functions";
 import { BASE_URL } from "../../config/config";
 
@@ -56,8 +57,7 @@ export default function LoginPage() {
     }
   };
 
-  const root = document.querySelector(":root");
-  root.style.setProperty("--body-bg-color", "linear-gradient(0.75turn, #4587bd, #9198e5)");
+  changeBodyBackGround("linear-gradient(0.75turn, #4587bd, #9198e5)");
   return (
     <div>
       <div className="containerDiv">

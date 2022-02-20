@@ -6,7 +6,12 @@ import axios from "axios";
 import "../../CSS/mymedia.css";
 
 import { updateCurrentUser } from "../../reduxActions/actions";
-import { fireErrorAlert, fireSuccessAlert, areParamsDefined } from "../../helper/functions";
+import {
+  fireErrorAlert,
+  fireSuccessAlert,
+  areParamsDefined,
+  changeBodyBackGround,
+} from "../../helper/functions";
 import { BASE_URL } from "../../config/config";
 
 export default function LoginPage() {
@@ -39,8 +44,7 @@ export default function LoginPage() {
     }
   };
 
-  const root = document.querySelector(":root");
-  root.style.setProperty("--body-bg-color", "linear-gradient(0.75turn, #4587bd, #9198e5)");
+  changeBodyBackGround("linear-gradient(0.75turn, #4587bd, #9198e5)");
   return (
     <div>
       <div className="containerDiv">

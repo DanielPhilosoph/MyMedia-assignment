@@ -25,6 +25,11 @@ export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * @param {string} date
+ * @returns {string}
+ ** Returns string as MM/DD/YYYY H:M:S
+ */
 export function formatDate(date) {
   try {
     let dateAsDate = new Date(date);
@@ -48,16 +53,30 @@ export function formatDate(date) {
   }
 }
 
+/**
+ * @param {string} params
+ * @returns {boolean}
+ ** Returns if any of the params are undefined
+ */
 export function areParamsDefined(...params) {
   let paramsDefined = true;
-  console.log(params);
   params.forEach((param) => {
     if (!param) paramsDefined = false;
   });
   return paramsDefined;
 }
 
-export function isNameValid(param) {
-  const regex = /^[a-zA-Z]+$/;
-  return regex.test(param);
+/**
+ * @param {string} name
+ * @returns {boolean}
+ ** Returns if the name is valid
+ */
+export function isNameValid(name) {
+  const regex = /^[a-zA-Z ]+$/;
+  return regex.test(name);
+}
+
+export function changeBodyBackGround(color) {
+  const root = document.querySelector(":root");
+  root.style.setProperty("--body-bg-color", color);
 }

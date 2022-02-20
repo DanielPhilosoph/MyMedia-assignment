@@ -1,9 +1,17 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./navbar.css";
+import { logout } from "../../reduxActions/actions";
 
 export default function NavBar() {
+  const dispatch = useDispatch();
+
+  const onLogoutClick = () => {
+    logout(dispatch);
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -20,7 +28,7 @@ export default function NavBar() {
             </Link>
           </Nav>
           <Nav>
-            <Link className="navbarLinks" to="/">
+            <Link className="navbarLinks" onClick={onLogoutClick} to="/">
               Logout
             </Link>
           </Nav>

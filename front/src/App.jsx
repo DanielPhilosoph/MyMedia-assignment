@@ -7,6 +7,9 @@ import UserPage from "./components/MainPage/UserPage/UserPage";
 
 function App() {
   const state = useSelector((state) => state);
+  const usersPagesRoutes = state.users.map((user) => {
+    return <Route key={user._id} path={`/${user.email}`} element={<UserPage user={user} />} />;
+  });
 
   return (
     <div className="App">
@@ -14,12 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
           {state.currentUser !== "" ? <Route path="/users" element={<MainPage />} /> : ""}
-          {state.users.map((user) => {
-            return (
-              <Route key={user._id} path={`/${user.email}`} element={<UserPage user={user} />} />
-            );
-          })}
+          {state.currentUser !== "" ? usersPagesRoutes : ""}
         </Routes>
       </BrowserRouter>
     </div>
