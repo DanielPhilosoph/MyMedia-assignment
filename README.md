@@ -1,6 +1,6 @@
 # MyMedia assignment
 
-## URL
+## Website Link
 
 ==> <a href="http://cicd-my-media-s3.s3-website.eu-west-2.amazonaws.com/" target="_blank">My Media Assignment Website</a> <==
 
