@@ -4,6 +4,9 @@ const { login } = require("../controllers/login");
 
 //? Route to:  /login
 
+/**
+ * * Body - { email: string, password: string }
+ */
 router.post("/", async (req, res) => {
   const response = await login(req);
   if (!response.error) {

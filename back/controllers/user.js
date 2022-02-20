@@ -5,8 +5,7 @@ const db = new DB();
 async function getUserById(id) {
   const response = await db.getUserById(id);
   if (response.user) {
-    const { hashPassword, ...returnedUser } = response.user;
-    return { user: returnedUser };
+    return { user: response.user };
   }
   return { error: response.error };
 }

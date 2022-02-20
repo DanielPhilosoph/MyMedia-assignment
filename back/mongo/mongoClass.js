@@ -1,6 +1,5 @@
 require("dotenv").config();
 const User = require("./models/User");
-const uniqid = require("uniqid");
 const { authenticateUser } = require("../helper/functions");
 const bcrypt = require("bcrypt");
 
@@ -25,7 +24,6 @@ class DB {
       }
       return { unique: true };
     } catch (error) {
-      console.log(error);
       return { error: "Error while querying for user", unique: false };
     }
   }
@@ -33,7 +31,7 @@ class DB {
   async getUserById(id) {
     try {
       let user = await this.User.findById(id);
-      const { __v, ...restUser } = user._doc;
+      const { __v, hashPassword, ...restUser } = user._doc;
       return { user: restUser };
     } catch (error) {
       return { error: "Could not find user" };
@@ -60,7 +58,6 @@ class DB {
         return { error: result.error, insert: false };
       }
     } catch (error) {
-      // console.log(error);
       return { error: "Could not insert user", insert: false };
     }
   }
@@ -83,7 +80,6 @@ class DB {
         return { users };
       }
     } catch (error) {
-      console.log(error);
       return { error: "Error while querying for users" };
     }
   }
@@ -116,7 +112,6 @@ class DB {
         );
         return { updated: true };
       } catch (error) {
-        console.log(error);
         return { updated: false, error: "Error while updating logs" };
       }
     }
@@ -128,7 +123,6 @@ class DB {
       await this.User.deleteMany({});
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }

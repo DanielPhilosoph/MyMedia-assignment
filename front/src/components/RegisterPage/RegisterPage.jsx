@@ -31,12 +31,14 @@ export default function LoginPage() {
     );
     const isFirstNameValid = isNameValid(firstName.current.value);
     const isLastNameValid = isNameValid(lastName.current.value);
+
     if (!areInputsDefined) {
       return fireErrorAlert("One or more fields are null");
     }
     if (!isFirstNameValid || !isLastNameValid) {
       return fireErrorAlert("Names must be letters");
     }
+
     try {
       const response = await axios.post("http://localhost:3001/register", {
         firstName: firstName.current.value,
