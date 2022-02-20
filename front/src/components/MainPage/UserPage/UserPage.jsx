@@ -1,7 +1,10 @@
 import React from "react";
-import { capitalizeFirstLetter, formatDate } from "../../../helper/functions";
+
+import { capitalizeFirstLetter, changeBodyBackGround, formatDate } from "../../../helper/functions";
 import NavBar from "../../NavBar/NavBar";
+
 export default function UserPage({ user }) {
+  changeBodyBackGround("white");
   return (
     <div>
       <NavBar />

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-import { fireErrorAlert } from "../../../helper/functions";
+import { fireErrorAlert, getLocalStorageInfo } from "../../../helper/functions";
 import { updateUsers, logout } from "../../../reduxActions/actions";
 import { BASE_URL } from "../../../config/config";
 
@@ -19,7 +19,7 @@ export default function UsersPage() {
     async function getUsers() {
       try {
         const response = await axios.get(`${BASE_URL}/user/users`, {
-          headers: { Authorization: state.currentUser.token },
+          headers: { Authorization: getLocalStorageInfo().token },
         });
         updateUsers(dispatch, response.data.users);
       } catch (error) {

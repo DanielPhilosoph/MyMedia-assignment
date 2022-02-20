@@ -76,7 +76,24 @@ export function isNameValid(name) {
   return regex.test(name);
 }
 
+/**
+ * @param {string} color
+ */
 export function changeBodyBackGround(color) {
   const root = document.querySelector(":root");
   root.style.setProperty("--body-bg-color", color);
+}
+
+/**
+ * @param {string} contentString
+ */
+export function setLocalStorageInfo(contentString) {
+  localStorage.setItem("myMediaInfo", contentString);
+}
+
+/**
+ * @returns {json}
+ */
+export function getLocalStorageInfo() {
+  return JSON.parse(localStorage.getItem("myMediaInfo"));
 }

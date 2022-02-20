@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ import {
   fireSuccessAlert,
   areParamsDefined,
   changeBodyBackGround,
+  setLocalStorageInfo,
 } from "../../helper/functions";
 import { BASE_URL } from "../../config/config";
 
@@ -34,6 +35,9 @@ export default function LoginPage() {
         if (response.data.login) {
           updateCurrentUser(dispatch, response.data.user);
           await fireSuccessAlert(`Welcome ${response.data.user.firstName}`);
+          setLocalStorageInfo(
+            JSON.stringify({ token: response.data.user.token, id: response.data.user._id })
+          );
           navigate("/users");
         }
       } catch (error) {
