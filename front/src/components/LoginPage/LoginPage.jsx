@@ -6,7 +6,7 @@ import axios from "axios";
 import "../../CSS/mymedia.css";
 
 import { updateCurrentUser } from "../../reduxActions/actions";
-import { fireErrorAlert, fireSuccessAlert, areParamsUndefined } from "../../helper/functions";
+import { fireErrorAlert, fireSuccessAlert, areParamsDefined } from "../../helper/functions";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function LoginPage() {
   };
 
   const onLoginClick = async () => {
-    if (!areParamsUndefined(email.current.value, password.current.value)) {
+    if (areParamsDefined(email.current.value, password.current.value)) {
       try {
         const response = await axios.post("http://localhost:3001/login", {
           email: email.current.value,

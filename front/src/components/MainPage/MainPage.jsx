@@ -6,6 +6,7 @@ import "../../CSS/mymedia.css";
 export default function MainPage() {
   const root = document.querySelector(":root");
   root.style.setProperty("--body-bg-color", "white");
+
   return (
     <div>
       <NavBar />

@@ -49,11 +49,16 @@ export function formatDate(date) {
   }
 }
 
-export function areParamsUndefined(...params) {
-  let isOneParamUndefined = false;
+export function areParamsDefined(...params) {
+  let paramsDefined = true;
   console.log(params);
   params.forEach((param) => {
-    if (!param) isOneParamUndefined = true;
+    if (!param) paramsDefined = false;
   });
-  return isOneParamUndefined;
+  return paramsDefined;
+}
+
+export function isNameValid(param) {
+  const regex = /^[a-zA-Z]+$/;
+  return regex.test(param);
 }

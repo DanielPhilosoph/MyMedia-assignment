@@ -4,7 +4,12 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import "../../CSS/mymedia.css";
 
-import { fireErrorAlert, fireSuccessAlert, areParamsUndefined } from "../../helper/functions";
+import {
+  fireErrorAlert,
+  fireSuccessAlert,
+  areParamsDefined,
+  isNameValid,
+} from "../../helper/functions";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -18,32 +23,33 @@ export default function LoginPage() {
   };
 
   const onRegisterClick = async () => {
-    let response;
-
-    if (
-      !areParamsUndefined(
-        email.current.value,
-        password.current.value,
-        lastName.current.value,
-        firstName.current.value
-      )
-    ) {
-      try {
-        response = await axios.post("http://localhost:3001/register", {
-          firstName: firstName.current.value,
-          lastName: lastName.current.value,
-          email: email.current.value,
-          password: password.current.value,
-        });
-        if (response.data.registered) {
-          await fireSuccessAlert(`Glad you registered ${response.data.user.firstName}!`);
-          navigate("/");
-        }
-      } catch (error) {
-        fireErrorAlert(error.response.data.error);
+    const areInputsDefined = areParamsDefined(
+      email.current.value,
+      password.current.value,
+      lastName.current.value,
+      firstName.current.value
+    );
+    const isFirstNameValid = isNameValid(firstName.current.value);
+    const isLastNameValid = isNameValid(lastName.current.value);
+    if (!areInputsDefined) {
+      return fireErrorAlert("One or more fields are null");
+    }
+    if (!isFirstNameValid || !isLastNameValid) {
+      return fireErrorAlert("Names must be letters");
+    }
+    try {
+      const response = await axios.post("http://localhost:3001/register", {
+        firstName: firstName.current.value,
+        lastName: lastName.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      });
+      if (response.data.registered) {
+        await fireSuccessAlert(`Glad you registered ${response.data.user.firstName}!`);
+        navigate("/");
       }
-    } else {
-      fireErrorAlert("One or more fields are null");
+    } catch (error) {
+      fireErrorAlert(error.response.data.error);
     }
   };
 
