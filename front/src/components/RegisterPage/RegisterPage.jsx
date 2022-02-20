@@ -10,6 +10,7 @@ import {
   areParamsDefined,
   isNameValid,
 } from "../../helper/functions";
+import { BASE_URL } from "../../config/config";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function LoginPage() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/register", {
+      const response = await axios.post(`${BASE_URL}/register`, {
         firstName: firstName.current.value,
         lastName: lastName.current.value,
         email: email.current.value,

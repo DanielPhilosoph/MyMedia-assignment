@@ -3,8 +3,10 @@ import UserDiv from "./UserDiv/UserDiv";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
+
 import { fireErrorAlert } from "../../../helper/functions";
 import { updateUsers } from "../../../reduxActions/actions";
+import { BASE_URL } from "../../../config/config";
 
 export default function UsersPage() {
   const search = useRef(null);
@@ -14,7 +16,7 @@ export default function UsersPage() {
   useEffect(() => {
     async function getUsers() {
       try {
-        const response = await axios.get("http://localhost:3001/user/users", {
+        const response = await axios.get(`${BASE_URL}/user/users`, {
           headers: { Authorization: state.currentUser.token },
         });
         updateUsers(dispatch, response.data.users);
@@ -37,10 +39,9 @@ export default function UsersPage() {
 
   const onSearchChange = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/user/users?query=${search.current.value}`,
-        { headers: { Authorization: state.currentUser.token } }
-      );
+      const response = await axios.get(`${BASE_URL}/users?query=${search.current.value}`, {
+        headers: { Authorization: state.currentUser.token },
+      });
       updateUsers(dispatch, response.data.users);
     } catch (error) {
       fireErrorAlert(error.response.data.error);

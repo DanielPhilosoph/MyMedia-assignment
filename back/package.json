@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "start": "node app"
   },
   "repository": {
     "type": "git",

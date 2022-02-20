@@ -7,6 +7,7 @@ import "../../CSS/mymedia.css";
 
 import { updateCurrentUser } from "../../reduxActions/actions";
 import { fireErrorAlert, fireSuccessAlert, areParamsDefined } from "../../helper/functions";
+import { BASE_URL } from "../../config/config";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function LoginPage() {
   const onLoginClick = async () => {
     if (areParamsDefined(email.current.value, password.current.value)) {
       try {
-        const response = await axios.post("http://localhost:3001/login", {
+        const response = await axios.post(`${BASE_URL}/login`, {
           email: email.current.value,
           password: password.current.value,
         });
